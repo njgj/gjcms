@@ -383,7 +383,7 @@ $.fn.ajaxSubmit = function(options) {
             }
         }
         else {
-            $io = $('<iframe name="' + id + '" src="../common/'+ s.iframeSrc +'" />');
+            $io = $('<iframe name="' + id + '" src="'+ s.iframeSrc +'" />');
             $io.css({ position: 'absolute', top: '-1000px', left: '-1000px' });
         }
         io = $io[0];
@@ -1029,7 +1029,7 @@ $.fn.formToArray = function(semantic, elements) {
 
 /**
  * Serializes form data into a 'submittable' string. This method will return a string
- * in the format: name1=value1&name2=value2
+ * in the format: name1=value1&amp;name2=value2
  */
 $.fn.formSerialize = function(semantic) {
     //hand off to jQuery.param for proper encoding
@@ -1038,7 +1038,7 @@ $.fn.formSerialize = function(semantic) {
 
 /**
  * Serializes all field elements in the jQuery object into a query string.
- * This method will return a string in the format: name1=value1&name2=value2
+ * This method will return a string in the format: name1=value1&amp;name2=value2
  */
 $.fn.fieldSerialize = function(successful) {
     var a = [];

@@ -1,0 +1,8 @@
+# 将 RewriteEngine 模式打开 
+RewriteEngine On 
+# Rewrite 系统规则请勿修改 
+
+#ErrorDocument 404 /gjcms/404.html
+
+RewriteRule ^article-([0-9]+)\.html$ article.php?id=$1 
+RewriteRule ^(.*)_list\.html$ $1_list.php 

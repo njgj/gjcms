@@ -1,13 +1,14 @@
 /*************************************************
 Validator v1.05
-code by ÎÒ·ğÉ½ÈË
+code by æˆ‘ä½›å±±äºº
 wfsr@msn.com
 *************************************************/
 Validator = {
 Require : /.+/,
 Email : /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 Phone : /^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$/,
-Mobile : /^((\(\d{2,3}\))|(\d{3}\-))?13\d{9}$/,
+/*Mobile : /^((\(\d{2,3}\))|(\d{3}\-))?13\d{9}$/,*/
+Mobile : /^[1][3-8]\d{9}$/,
 Url : /^http:\/\/[A-Za-z0-9]+\.[A-Za-z0-9]+[\/=\?%\-&_~`@[\]\':+!]*([^<>\"\"])*$/,
 IdCard : "this.IsIdCard(value)",
 Currency : /^\d+(\.\d+)?$/,
@@ -19,7 +20,7 @@ Double : /^[-\+]?\d+(\.\d+)?$/,
 English : /^[A-Za-z]+$/,
 Chinese : /^[\u0391-\uFFE5]+$/,
 /*Username : /^[a-z]\w{3,}$/i,*/
-Username : /^[a-zA-Z\u4e00-\u9fa5][\u0391-\uFFE5\w]{1,}$/i,       //ÒÔ×ÖÄ¸»òÖĞÎÄ¿ªÍ·ÖÁÉÙ2Î»
+Username : /^[a-zA-Z\u4e00-\u9fa5][\u0391-\uFFE5\w]{1,}$/i,       //ä»¥å­—æ¯æˆ–ä¸­æ–‡å¼€å¤´è‡³å°‘2ä½
 UnSafe : /^(([A-Z]*|[a-z]*|\d*|[-_\~!@#\$%\^&\*\.\(\)\[\]\{\}<>\?\\\/\'\"]*)|.{0,5})$|\s/,
 IsSafe : function(str){return !this.UnSafe.test(str);},
 SafeString : "this.IsSafe(value)",
@@ -33,7 +34,7 @@ Compare : "this.compare(value,getAttribute('operator'),getAttribute('to'))",
 Custom : "this.Exec(value, getAttribute('regexp'))",
 Group : "this.MustChecked(getAttribute('name'), getAttribute('min'), getAttribute('max'))",
 ErrorItem : [document.forms[0]],
-ErrorMessage : ["ÒÔÏÂÔ­Òòµ¼ÖÂÌá½»Ê§°Ü£º\t\t\t\t"],
+ErrorMessage : ["ä»¥ä¸‹åŸå› å¯¼è‡´æäº¤å¤±è´¥ï¼š\t\t\t\t"],
 Validate : function(theForm, mode){
 var obj = theForm || event.srcElement;
 var count = obj.elements.length;
@@ -88,7 +89,7 @@ var span = document.createElement("SPAN");
 span.id = "__ErrorMessagePanel";
 span.style.color = "red";
 this.ErrorItem[i].parentNode.appendChild(span);
-span.innerHTML = this.ErrorMessage[i].replace(/\d+:/,"*");
+span.innerHTML = this.ErrorMessage[i].replace(/\d+:/,"&nbsp;*");
 }
 catch(e){alert(e.description);}
 }
@@ -158,7 +159,7 @@ IsIdCard : function(number){
 var date, Ai;
 var verify = "10x98765432";
 var Wi = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
-var area = ['','','','','','','','','','','','±±¾©','Ìì½ò','ºÓ±±','É½Î÷','ÄÚÃÉ¹Å','','','','','','ÁÉÄş','¼ªÁÖ','ºÚÁú½­','','','','','','','','ÉÏº£','½­ËÕ','Õã½­','°²Î¢','¸£½¨','½­Î÷','É½¶«','','','','ºÓÄÏ','ºş±±','ºşÄÏ','¹ã¶«','¹ãÎ÷','º£ÄÏ','','','','ÖØÇì','ËÄ´¨','¹óÖİ','ÔÆÄÏ','Î÷²Ø','','','','','','','ÉÂÎ÷','¸ÊËà','Çàº£','ÄşÏÄ','ĞÂ½®','','','','','','Ì¨Íå','','','','','','','','','','Ïã¸Û','°ÄÃÅ','','','','','','','','','¹úÍâ'];
+var area = ['','','','','','','','','','','','åŒ—äº¬','å¤©æ´¥','æ²³åŒ—','å±±è¥¿','å†…è’™å¤','','','','','','è¾½å®','å‰æ—','é»‘é¾™æ±Ÿ','','','','','','','','ä¸Šæµ·','æ±Ÿè‹','æµ™æ±Ÿ','å®‰å¾®','ç¦å»º','æ±Ÿè¥¿','å±±ä¸œ','','','','æ²³å—','æ¹–åŒ—','æ¹–å—','å¹¿ä¸œ','å¹¿è¥¿','æµ·å—','','','','é‡åº†','å››å·','è´µå·','äº‘å—','è¥¿è—','','','','','','','é™•è¥¿','ç”˜è‚ƒ','é’æµ·','å®å¤','æ–°ç–†','','','','','','å°æ¹¾','','','','','','','','','','é¦™æ¸¯','æ¾³é—¨','','','','','','','','','å›½å¤–'];
 var re = number.match(/^(\d{2})\d{4}(((\d{2})(\d{2})(\d{2})(\d{3}))|((\d{4})(\d{2})(\d{2})(\d{3}[x\d])))$/i);
 if(re == null) return false;
 if(re[1] >= area.length || area[re[1]] == "") return false;
